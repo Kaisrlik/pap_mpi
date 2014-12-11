@@ -1,14 +1,14 @@
-CXX = gcc
+CXX = mpiCC
 
 SRCS    := $(wildcard *.cpp *.c src/*.cpp src/*c)
 OBJS     = $(addprefix bin/obj/,$(notdir $(SRCS:.cpp=.o)))
 OBJS     = $(addprefix bin/obj/,$(notdir $(SRCS:.c=.o)))
 
-CXXFLAGS = -Wall -pedantic -O2
-INCLUDES = -I./
+CXXFLAGS = -Wall -pedantic -O2 -fopenmp 
+INCLUDES = -I/usr/include/
 
 LDFLAGS  = #
-LDLIBS   = #-lpthread
+LDLIBS   = -lm#-l/usr/lib/openmpi/ #-lpthread
 
 OBJDIR   = bin/obj
 
@@ -29,7 +29,7 @@ all: $(TARGET)
 
 $(TARGET) : $(OBJS)
 	@echo Linking $(TARGET)...
-	@$(CXX) $(LDFLAGS) $(LDLIBS) -o $@ $^
+#	@$(CXX) $(LDFLAGS) $(LDLIBS) -o $@ $^
 
 bin/obj/%.o: src/%.cpp
 	@echo Compiling $<...
@@ -39,7 +39,10 @@ bin/obj/%.o: src/%.cpp
 bin/obj/%.o: src/%.c
 	@echo Compiling $<...
 	@mkdir -p $(OBJDIR)
-	@$(CXX) $(CXXFLAGS) $(includes) -c -o $@ $<
+	@$(CXX) $(CXXFLAGS) $(includes) -o $(TARGET)  $<
+	@echo "$(CXX) $(CXXFLAGS) $(includes) -o $(TARGET)  $<"
+#	@echo "$(CXX) $(CXXFLAGS) $(includes) -c -o $@ $<"
+#	@$(CXX) $(CXXFLAGS) $(includes) -c -o $@ $<
 
 clean :
 	$(RM) -r $(OBJDIR)
