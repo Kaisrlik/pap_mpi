@@ -23,31 +23,34 @@ DEPDIR   = bin/dep
 
 #all: depend $(TARGET)
 all: $(TARGET)
-	@echo Installing $(TARGET) into $(DESTDIR)
+#	@echo Installing $(TARGET) into $(DESTDIR)
 	@mkdir -p $(DESTDIR)
 #	@install -m 0755 $(TARGET) $(DESTDIR)
 
 $(TARGET) : $(OBJS)
-	@echo Linking $(TARGET)...
+#	@echo Linking $(TARGET)...
 #	@$(CXX) $(LDFLAGS) $(LDLIBS) -o $@ $^
 
 bin/obj/%.o: src/%.cpp
-	@echo Compiling $<...
+#	@echo Compiling $<...
 	@mkdir -p $(OBJDIR)
 	@$(CXX) $(CXXFLAGS) $(includes) -c -o $@ $<
 
 bin/obj/%.o: src/%.c
-	@echo Compiling $<...
+#	@echo Compiling $<...
 	@mkdir -p $(OBJDIR)
 	@$(CXX) $(CXXFLAGS) $(includes) -o $(TARGET)  $<
-	@echo "$(CXX) $(CXXFLAGS) $(includes) -o $(TARGET)  $<"
+#	@echo "$(CXX) $(CXXFLAGS) $(includes) -o $(TARGET)  $<"
 #	@echo "$(CXX) $(CXXFLAGS) $(includes) -c -o $@ $<"
 #	@$(CXX) $(CXXFLAGS) $(includes) -c -o $@ $<
 
 clean :
-	$(RM) -r $(OBJDIR)
-	$(RM) -r $(DEPDIR)
-	$(RM) $(TARGET)
+#	$(RM) -r $(OBJDIR)
+#	$(RM) -r $(DEPDIR)
+#	$(RM) $(TARGET)
+	@rm -fr $(OBJDIR)
+	@rm -fr $(DEPDIR)
+	@rm -f $(TARGET)
 
 distclean: clean
 	$(RM) $(DESTDIR)/$(TARGET)

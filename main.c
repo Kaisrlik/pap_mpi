@@ -34,7 +34,7 @@ inline int max(int * a, int len){
 void histogram(int * dat, int * t, const double c, const int a, const int b){
 //   #pragma opm parallel default(shared) shared(nbucket, a, b)
 //   {
-         #pragma omp parallel for num_threads(4)
+         #pragma omp parallel for num_threads(1)
          for(int i = a; i < b; i++){
 //            printf("%d\n", dat[i]);
             t[(int)(dat[i]/c)]++;
