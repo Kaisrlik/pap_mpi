@@ -13,7 +13,7 @@ do
          val="$val + `mpirun -np $p ./run`"
       done
       val="$val ) / 30"
-      echo $val
+#      echo $val
       val=`echo $val | bc -l`
       echo "P:$p T:$t == $val"
    done
